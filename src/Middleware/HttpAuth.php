@@ -1,0 +1,59 @@
+<?php
+
+namespace Merkeleon\Laravel\HttpAuth\Middleware;
+
+use Closure;
+use Merkeleon\Laravel\HttpAuth\Helper;
+
+class HttpAuth
+{
+    protected $lockFile;
+
+    public function __construct()
+    {
+        $this->lockFile = storage_path('app/htpasswd');
+    }
+
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
+     * @return mixed
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     */
+    public function handle($request, Closure $next)
+    {
+        if (!Helper::isLocked())
+        {
+            return $next($request);
+        }
+        if (!$this->isWhiteListed() && !$this->isAuthenticated())
+        {
+            return response('Unauthorized', 401, [
+                'WWW-Authenticate' => 'Basic realm="Locked"',
+            ]);
+        }
+
+        return $next($request);
+    }
+
+    public function isWhiteListed()
+    {
+        $ips = Helper::getWhiteListIps();
+
+        return array_search(request()->server('REMOTE_ADDR'), $ips) !== false;
+    }
+
+    public function isAuthenticated()
+    {
+        $username = request()->server('PHP_AUTH_USER');
+        if ($username === null)
+        {
+            return false;
+        }
+
+        return Helper::getUserPassword($username) === request()->server('PHP_AUTH_PW');
+    }
+}
