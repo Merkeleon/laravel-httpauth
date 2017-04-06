@@ -21,6 +21,13 @@ class Helper
         return File::exists(self::lockFile());
     }
 
+    private static function putContent($content) {
+        if (!self::lockFileExists()) {
+            File::put(self::lockFile(), json_encode($content));
+        }
+        File::put(self::lockFile(), json_encode($content));
+    }
+
     private static function getContent()
     {
         if (!self::lockFileExists())
@@ -39,11 +46,9 @@ class Helper
 
     public static function setUsers($users)
     {
-        $content = File::get(self::lockFile());
-
-        $data = json_decode($content, true) ?: [];
+        $data = self::getContent();
         array_set($data, 'users', $users);
-        File::put(self::lockFile(), json_encode($data));
+        self::putContent($data);
     }
 
     public static function getUserPassword($username)
@@ -60,16 +65,14 @@ class Helper
 
     public static function getWhiteListIps()
     {
-        return array_get(self::getContent(), 'whitelist');
+        return array_get(self::getContent(), 'whitelist', []);
     }
 
     public static function setWhiteListIps($ips)
     {
-        $content = File::get(self::lockFile());
-
-        $data = json_decode($content, true) ?: [];
+        $data = self::getContent();
         array_set($data, 'whitelist', array_unique($ips));
-        File::put(self::lockFile(), json_encode($data));
+        self::putContent($data);
     }
 
     public static function addWhiteListIp($ip)
