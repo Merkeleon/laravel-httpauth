@@ -12,7 +12,7 @@ class Forget extends Command
     protected $signature = 'http-auth:whitelist:forget {ip?}';
     protected $description = 'Remove one ip without http auth.';
 
-    public function fire()
+    public function handle()
     {
         $ips    = Helper::getWhiteListIps();
         if (empty($ips)) {

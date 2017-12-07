@@ -11,7 +11,7 @@ class Make extends Command
     protected $signature = 'http-auth:user:make {user?} {password?}';
     protected $description = 'Add or Update user';
 
-    public function fire()
+    public function handle()
     {
         $username = $this->argument('user') ?: $this->ask('What is username?');
         $password = $this->argument('password') ?: $this->ask('What is password?');

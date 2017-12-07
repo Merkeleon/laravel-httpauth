@@ -11,7 +11,7 @@ class Show extends Command
     protected $signature = 'http-auth:user:show';
     protected $description = 'Show list of users';
 
-    public function fire()
+    public function handle()
     {
         $users = Helper::getUsers();
         if (empty($users))

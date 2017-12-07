@@ -12,7 +12,7 @@ class Add extends Command
     protected $signature = 'http-auth:whitelist:add {ip?}';
     protected $description = 'Creates white list of ips without http auth.';
 
-    public function fire()
+    public function handle()
     {
         $ip = $this->argument('ip') ?: $this->ask('What is ip?');
         Helper::addWhiteListIp($ip);

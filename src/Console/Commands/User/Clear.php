@@ -11,7 +11,7 @@ class Clear extends Command
     protected $signature = 'http-auth:user:clear';
     protected $description = 'Clear user list.';
 
-    public function fire()
+    public function handle()
     {
         Helper::setUsers([]);
         $this->info('Users list cleared');
