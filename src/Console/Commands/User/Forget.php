@@ -11,7 +11,7 @@ class Forget extends Command
     protected $signature = 'http-auth:user:forget {user?}';
     protected $description = 'Remove one user from list.';
 
-    public function fire()
+    public function handle()
     {
         if (!Helper::isLocked())
         {

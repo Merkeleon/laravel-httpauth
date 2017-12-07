@@ -11,7 +11,7 @@ class Show extends Command
     protected $signature = 'http-auth:whitelist:show';
     protected $description = 'Show list of whitelisted ips';
 
-    public function fire()
+    public function handle()
     {
         $ips = Helper::getWhiteListIps();
         if (empty($ips))

@@ -12,7 +12,7 @@ class Clear extends Command
     protected $signature = 'http-auth:whitelist:clear';
     protected $description = 'Clear white list of ips without http auth.';
 
-    public function fire()
+    public function handle()
     {
         Helper::setWhiteListIps([]);
         $this->warn("Whitelist cleared");

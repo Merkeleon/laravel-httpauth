@@ -12,7 +12,7 @@ class Base extends Command
     protected $signature = 'http-auth:whitelist:base';
     protected $description = 'Creates white list of ips without http auth.';
 
-    public function fire()
+    public function handle()
     {
         $baseIps = require __DIR__.'/../stubs/base-whitelist.php';
         $ip = gethostbyname(url()->to('/'));
