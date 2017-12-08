@@ -4,7 +4,7 @@ namespace Merkeleon\Laravel\HttpAuth\Console\Commands\Whitelist;
 
 
 use File;
-use Illuminate\Console\Command;
+use Merkeleon\Laravel\HttpAuth\Console\Commands\Base as Command;
 use Merkeleon\Laravel\HttpAuth\Helper;
 
 class Clear extends Command
