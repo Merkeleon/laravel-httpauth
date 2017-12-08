@@ -42,4 +42,14 @@ class HttpAuthServiceProvider extends ServiceProvider
         $kernel = $this->app[Kernel::class];
         $kernel->pushMiddleware(HttpAuth::class);
     }
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+
+    }
 }

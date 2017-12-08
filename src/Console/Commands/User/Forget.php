@@ -3,7 +3,7 @@
 namespace Merkeleon\Laravel\HttpAuth\Console\Commands\User;
 
 
-use Illuminate\Console\Command;
+use Merkeleon\Laravel\HttpAuth\Console\Commands\Base as Command;
 use Merkeleon\Laravel\HttpAuth\Helper;
 
 class Forget extends Command
