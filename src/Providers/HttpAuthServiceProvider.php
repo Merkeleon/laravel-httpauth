@@ -41,6 +41,11 @@ class HttpAuthServiceProvider extends ServiceProvider
         }
         $kernel = $this->app[Kernel::class];
         $kernel->pushMiddleware(HttpAuth::class);
+
+        $this->loadViewsFrom(dirname(__DIR__) . '/resources/views', 'laravel-httpauth');
+        $this->publishes([
+            dirname(__DIR__) . '/resources/views' => resource_path('views/vendor/laravel-httpauth'),
+        ]);
     }
 
     /**

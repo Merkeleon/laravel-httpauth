@@ -31,7 +31,7 @@ class HttpAuth
         }
         if (!$this->isWhiteListed() && !$this->isAuthenticated())
         {
-            return response('Unauthorized', 401, [
+            return response(view('laravel-httpauth::unauthorized')->render(), 401, [
                 'WWW-Authenticate' => 'Basic realm="Locked"',
             ]);
         }
