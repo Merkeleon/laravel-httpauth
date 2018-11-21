@@ -13,6 +13,9 @@ use Merkeleon\Laravel\HttpAuth\Console\Commands\Whitelist\Base as WhitelistBase;
 use Merkeleon\Laravel\HttpAuth\Console\Commands\Whitelist\Clear as WhitelistClear;
 use Merkeleon\Laravel\HttpAuth\Console\Commands\Whitelist\Forget as WhitelistForget;
 use Merkeleon\Laravel\HttpAuth\Console\Commands\Whitelist\Show as WhitelistShow;
+use Merkeleon\Laravel\HttpAuth\Console\Commands\Redirect\Make as RedirectMake;
+use Merkeleon\Laravel\HttpAuth\Console\Commands\Redirect\Clear as RedirectClear;
+use Merkeleon\Laravel\HttpAuth\Console\Commands\Redirect\Show as RedirectShow;
 use Merkeleon\Laravel\HttpAuth\Middleware\HttpAuth;
 
 class HttpAuthServiceProvider extends ServiceProvider
@@ -37,6 +40,10 @@ class HttpAuthServiceProvider extends ServiceProvider
                 WhitelistClear::class,
                 WhitelistForget::class,
                 WhitelistShow::class,
+
+                RedirectMake::class,
+                RedirectClear::class,
+                RedirectShow::class,
             ]);
         }
         $kernel = $this->app[Kernel::class];

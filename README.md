@@ -20,6 +20,12 @@ After this actions you easily can create HttpAuth on your site:
 php artisan http-auth:user:make
 ```
 
+You can also enable redirect from your site to a third-party resource:
+
+```shell
+php artisan http-auth:redirect:make
+```
+
 ## Examples
 
 Soon...

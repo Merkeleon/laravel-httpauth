@@ -13,7 +13,7 @@ class Helper
 
     public static function isLocked()
     {
-        return self::lockFileExists() && count(self::getUsers());
+        return self::lockFileExists() && (self::getRedirect() || count(self::getUsers()));
     }
 
     public static function lockFileExists()
@@ -94,5 +94,17 @@ class Helper
         $users = self::getUsers();
         array_forget($users, $username);
         self::setUsers($users);
+    }
+
+    public static function makeRedirect($redirectUrl)
+    {
+        $data = self::getContent();
+        array_set($data, 'redirect', $redirectUrl);
+        self::putContent($data);
+    }
+
+    public static function getRedirect()
+    {
+        return array_get(self::getContent(), 'redirect');
     }
 }
