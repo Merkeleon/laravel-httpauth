@@ -29,11 +29,21 @@ class HttpAuth
         {
             return $next($request);
         }
-        if (!$this->isWhiteListed() && !$this->isAuthenticated())
+        if (!$this->isWhiteListed())
         {
-            return response(view('laravel-httpauth::unauthorized')->render(), 401, [
-                'WWW-Authenticate' => 'Basic realm="Locked"',
-            ]);
+            $redirectUrl = Helper::getRedirect();
+
+            if ($redirectUrl)
+            {
+                return redirect($redirectUrl, 302);
+            }
+
+            if (!$this->isAuthenticated())
+            {
+                return response(view('laravel-httpauth::unauthorized')->render(), 401, [
+                    'WWW-Authenticate' => 'Basic realm="Locked"',
+                ]);
+            }
         }
 
         return $next($request);
