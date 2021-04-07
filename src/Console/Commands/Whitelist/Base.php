@@ -3,7 +3,6 @@
 namespace Merkeleon\Laravel\HttpAuth\Console\Commands\Whitelist;
 
 
-use File;
 use Merkeleon\Laravel\HttpAuth\Console\Commands\Base as Command;
 use Merkeleon\Laravel\HttpAuth\Helper;
 
