@@ -2,13 +2,13 @@
 
 namespace Merkeleon\Laravel\HttpAuth;
 
-use File;
+use Storage;
 
 class Helper
 {
     public static function lockFile()
     {
-        return storage_path('app/httpauth');
+        return 'httpauth';
     }
 
     public static function isLocked()
@@ -18,14 +18,14 @@ class Helper
 
     public static function lockFileExists()
     {
-        return File::exists(self::lockFile());
+        return Storage::exists(self::lockFile());
     }
 
     private static function putContent($content) {
         if (!self::lockFileExists()) {
-            File::put(self::lockFile(), json_encode($content));
+            Storage::put(self::lockFile(), json_encode($content));
         }
-        File::put(self::lockFile(), json_encode($content));
+        Storage::put(self::lockFile(), json_encode($content));
     }
 
     private static function getContent()
@@ -34,7 +34,7 @@ class Helper
         {
             return [];
         }
-        $content = File::get(self::lockFile());
+        $content = Storage::get(self::lockFile());
 
         return json_decode($content, true) ?: [];
     }

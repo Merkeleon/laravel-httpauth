@@ -7,13 +7,6 @@ use Merkeleon\Laravel\HttpAuth\Helper;
 
 class HttpAuth
 {
-    protected $lockFile;
-
-    public function __construct()
-    {
-        $this->lockFile = storage_path('app/htpasswd');
-    }
-
     /**
      * Handle an incoming request.
      *
